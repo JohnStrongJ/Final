@@ -1,0 +1,25 @@
+body {
+    background-color: aliceblue;
+}
+
+.asteriskField {
+    display: none;
+}
+
+form > .alert > ul > li {
+    list-style: none;
+    color: lightcoral;
+    font-size: 1rem;
+    display: inline;
+}
+
+.help-block,
+.help-block ~ ul > li{
+    font-size: 0.8em;
+    color: gray;
+}
+
+.help-block > strong {
+    color: lightcoral;
+    font-size: 1rem;
+}

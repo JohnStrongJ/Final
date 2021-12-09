@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    About Quicker Cooking
+{% endblock %}
+
+{% block body %}
+
+    <h5>What is Quicker Cooking?</h5>
+    <p>Quicker Cooking allows users to search for recipes created by other users and upload their own recipes.</p>
+    <h5>What makes Quicker Cooker unique?</h5>
+    <p>All of the recipes on Quicker Cooking are made by users like you. Every recipe gets straight to the point, without any backstory, which allows you to get to finding and making the recipes you love quicker.</p>
+    <h5>Why should I register?</h5>
+    <p class="mb-0">After registering for a free account users may enjoy the following immediately:</p>
+    <ul>
+    <li>Create, edit, and share recipes</li>
+    <li>Browse other users' recipes</li>
+    <li>Save recipes for later by adding them to your Favorites list</li>
+    </ul>
+
+    {% if user.is_authenticated %}
+
+    {% else %}
+        <p>Ready to get started? Create an account <a class="fw-bold" href="{% url 'register' %}">here!</a></p>
+    {% endif %}
+
+{% endblock %}

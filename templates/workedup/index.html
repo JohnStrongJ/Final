@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Quicker Cooking
+{% endblock %}
+
+{{% block bg-img %}
+
+    <div class="bg-image d-flex flex-column justify-content-center align-items-center"
+         style="
+                 background-image: url({% static 'img/cookie-bg.png' %});
+                 height: 100vh;">
+        <h1 class="text-white">Welcome to Quicker Cooking!</h1>
+        {% if not user.is_authenticated %}
+            <p><a class="btn btn-success" href="{% url 'register' %}">Create an account</a> <a class="btn btn-secondary" href="{% url 'about' %}">Learn about us!</a></p>
+        {% else %}
+            <p><a class="btn btn-primary" href="{% url 'browse' %}">Browse Recipes</a> <a class="btn btn-info" href="{% url 'create_recipe' %}">Upload a Recipe</a></p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block body %}
+    <p>Quicker Cooking is a recipe compilation site featuring recipes submitted by users like you. <a href="{% url 'about' %}">Learn more here!</a></p>
+{% endblock %}

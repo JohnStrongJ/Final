@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Personal Favorites
+{% endblock %}
+
+{% block body %}
+    <h1>Browse Personal Favorites</h1>
+    {% for favorite in favorites reversed %}
+        {% if user == favorite.user %}
+            <div class="card d-inline-block p-1 m-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ favorite.recipe.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Prep time: {{ favorite.recipe.prep_time }} minutes</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Cook time: {{ favorite.recipe.cook_time }} minutes</h6>
+                    <a href="{% url 'view_recipe' favorite.recipe.id %}" class="card-link btn btn-danger">View Recipe</a>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+
+
+{% endblock %}
+

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ recipe.title }}
+{% endblock %}
+
+{% block body %}
+    <div class="row mt-3">
+        <div class="col-8 mx-auto">
+            <h1 class="fw-bold text-capitalize">{{ recipe.title }}</h1>
+            <h5 class="px-3 text-muted">by  {{ recipe.user.username }}</h5>
+            <h6 class="text-muted col-12 col-md-6 d-inline-block mb-1">Uploaded {{ recipe.created_at | date:"F d, Y" }}</h6>
+            {% if user ==  recipe.user or user.is_superuser %}
+                <a class="btn btn-outline-info d-inline" href="{% url 'manage_recipe' recipe.id %}">Manage</a>
+                <a href="{% url 'delete_recipe' recipe.id %}" class="btn d-inline btn-danger mx-3">Delete</a>
+            {% endif %}
+            <br>
+            <button class="btn btn-dark mt-3" id="share-btn">Share</button>
+            <hr>
+            <div class="row">
+                <div class="col-4 text-muted">
+                    <p class="mb-0 text-uppercase">Prep Time</p>
+                    <h5 class="fw-bold text-success">{{ recipe.prep_time }} minutes</h5>
+                </div>
+                <div class="col-4 text-muted">
+                    <p class="mb-0 text-uppercase">Cook Time</p>
+                    <h5 class="fw-bold text-success">{{ recipe.cook_time }} minutes</h5>
+                </div>
+                <div class="col-4 text-muted">
+                    <p class="mb-0 text-uppercase">Servings</p>
+                    <h5 class="fw-bold text-success">{{ recipe.servings }}</h5>
+                </div>
+            </div>
+            <div>
+                <h3 class="fw-bold">Ingredients</h3>
+                <p class="px-3">{{ recipe.ingredients|linebreaksbr }}</p>
+            </div>
+            <div>
+                <h3 class="fw-bold">Instructions</h3>
+                <p class="px-3">{{ recipe.instructions|linebreaksbr }}</p>
+            </div>
+            <div class="row">
+                <div class="col-12 text-start">
+                    <a class="" id="toggle" href="{% url 'toggle_favorite' recipe.id %}"><i class="bi bi-heart text-danger"></i> Toggle this recipe as a favorite</a>
+                    {% for favorite in favorites %}
+                        {% if favorite.recipe == recipe and user == favorite.user %}
+                            <p class="fw-bold text-danger" id="favorite"><i class="bi bi-heart-fill text-danger"></i> This recipe is in your favorites </p>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/share.js' %}"></script>
+{% endblock %}
